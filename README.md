@@ -1,53 +1,94 @@
-This is a [Kobweb](https://github.com/varabyte/kobweb) project bootstrapped with the `app/empty` template.
+# CharLEE_X Website
 
-This template is useful if you already know what you're doing and just want a clean slate. By default, it
-just creates a blank home page (which prints to the console so you can confirm it's working)
+Web version built with [Compose Multiplatform for Web](#compose-multiplatform-for-web) and [Kotlin/Wasm](#kotlinwasm).
 
-If you are still learning, consider instantiating the `app` template (or one of the examples) to see actual,
-working projects.
+## Kotlin/Wasm
 
-## Getting Started
+> **Note**
+> Kotlin/Wasm is Experimental and may be changed at any time. Use it only for evaluation purposes.
+> We would appreciate your feedback on it in the public Slack channel [#webassembly](https://slack-chats.kotlinlang.org/c/webassembly).
+> If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/issue/KT-56492).
 
-First, run the development server by typing the following command in a terminal under the `site` folder:
+Kotlin/Wasm is a new experimental target that enables developers to compile Kotlin code to WebAssembly (Wasm).
 
-```bash
-$ cd site
-$ kobweb run
-```
+By compiling Kotlin code to WebAssembly, you can run it on any WebAssembly-compatible environment that meets Kotlin's requirements, including web browsers.
+This creates numerous opportunities, such as developing high-performance web applications and serverless functions.
 
-Open [http://localhost:8080](http://localhost:8080) with your browser to see the result.
+## Compose Multiplatform for Web
 
-You can use any editor you want for the project, but we recommend using **IntelliJ IDEA Community Edition** downloaded
-using the [Toolbox App](https://www.jetbrains.com/toolbox-app/).
+> **Note**
+> Web support is Experimental and may be changed at any time. Use it only for evaluation purposes.
+> We would appreciate your feedback on it in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
+> If you face any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
 
-Press `Q` in the terminal to gracefully stop the server.
+Compose for Web is based on [Kotlin/Wasm](https://kotl.in/wasm), the newest target for Kotlin Multiplatform projects.
+It allows you to run your code in the browser with all the benefits that WebAssembly has to offer, such as good and predictable performance for your applications.
 
-### Live Reload
+## Setup environment
 
-Feel free to edit / add / delete new components, pages, and API endpoints! When you make any changes, the site will
-indicate the status of the build and automatically reload when ready.
+### IDE
 
-## Exporting the Project
+We recommend using [IntelliJ IDEA 2023.1 or later](https://www.jetbrains.com/idea/) to work with the project.
+It has Kotlin/Wasm support out of the box.
 
-When you are ready to ship, you should shutdown the development server and then export the project using:
+### Browser (for Kotlin/Wasm target)
 
-```bash
-kobweb export
-```
+Almost all modern browsers already support WebAssembly 1.0.
 
-When finished, you can run a Kobweb server in production mode:
+To run applications built with Kotlin/Wasm in a browser, you need to enable an experimental [garbage collection feature](https://github.com/WebAssembly/gc):
 
-```bash
-kobweb run --env prod
-```
+**Chrome**:
 
-If you want to run this command in the Cloud provider of your choice, consider disabling interactive mode since nobody
-is sitting around watching the console in that case anyway. To do that, use:
+For version 109:
 
-```bash
-kobweb run --env prod --notty
-```
+  1. Run the application with the `--js-flags=--experimental-wasm-gc` command line argument.
 
-Kobweb also supports exporting to a static layout which is compatible with static hosting providers, such as GitHub
-Pages, Netlify, Firebase, any presumably all the others. You can read more about that approach here:
-https://bitspittle.dev/blog/2022/staticdeploy
+For version 110 or later:
+
+  1. Go to `chrome://flags/#enable-webassembly-garbage-collection` in your browser.
+  2. Enable **WebAssembly Garbage Collection**.
+  3. Relaunch your browser.
+
+**Firefox Nightly**:
+
+For version 112 or later:
+
+1. Go to `about:config` in your browser.
+2. Enable `javascript.options.wasm_function_references` and `javascript.options.wasm_gc` options.
+3. Relaunch your browser.
+
+**Edge**:
+
+For version 109 or later:
+
+1. Run the application with the `--js-flags=--experimental-wasm-gc` command line argument.
+
+For more information see https://kotl.in/wasm_help/.
+
+## Build and run
+
+Check out the repository, navigate to the project folder, and use the following commands:
+
+### Run Web version via Gradle
+
+Run the following Gradle command in the terminal: `./gradlew :web:wasmRun`
+
+Once the application starts, open the following URL in your browser: `http://localhost:8080`
+
+### Run Desktop version via Gradle
+
+Run the following Gradle command in the terminal: `./gradlew :desktop:run`
+
+### Install Android application via Gradle
+
+Run the following Gradle command in the terminal: `./gradlew :android:installDebug`
+
+# Feedback & questions
+
+Give it a try, and share your feedback and ask questions in the Kotlin Slack [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web) channel (if you’re not a member, [apply here](https://kotl.in/slack)) or on Twitter to [@bashorov](https://twitter.com/bashorov).
+
+# Learn more
+
+* [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform)
+* [Kotlin/Wasm](https://kotl.in/wasm/)
+* [Other examples](../../../#examples)

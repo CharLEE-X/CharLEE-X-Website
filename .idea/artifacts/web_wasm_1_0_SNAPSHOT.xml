@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="web-wasm-1.0-SNAPSHOT">
+    <output-path>$PROJECT_DIR$/web/build/libs</output-path>
+    <root id="archive" name="web-wasm-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="charleex-website.web.wasmMain" />
+    </root>
+  </artifact>
+</component>
