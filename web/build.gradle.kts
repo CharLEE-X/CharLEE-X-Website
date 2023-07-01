@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import org.jetbrains.kotlin.incremental.deleteDirectoryContents
 
 plugins {
     kotlin("multiplatform")
@@ -59,4 +60,39 @@ compose {
     kotlinCompilerPlugin.set(composeVersion)
     val kotlinVersion = libs.versions.kotlin.get()
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
+}
+
+val docsDir = "$rootDir/docs"
+
+tasks.register("copyWasmAppToDocs") {
+    group = "kotlin browser"
+    dependsOn("copyDistToDocs")
+    doLast {
+        copy {
+            from("$buildDir/compileSync/wasm/main/productionExecutable/kotlin/wasmapp.uninstantiated.mjs")
+            into(docsDir)
+        }
+    }
+}
+
+tasks.register("copyDistToDocs") {
+    group = "kotlin browser"
+    dependsOn("wasmBrowserProductionWebpack")
+    doLast {
+        copy {
+            from("$buildDir/dist/wasm/productionExecutable")
+            into(docsDir)
+        }
+    }
+}
+
+tasks.register("copyFaviconToDocs") {
+    group = "kotlin browser"
+    dependsOn("copyWasmAppToDocs")
+    doLast {
+        copy {
+            from("$rootDir/kotlin-js-store/favicon.ico")
+            into(docsDir)
+        }
+    }
 }
