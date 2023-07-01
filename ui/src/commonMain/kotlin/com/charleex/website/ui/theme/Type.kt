@@ -6,10 +6,17 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+/**
+ * [Montserrat](https://fonts.google.com/specimen/Montserrat) font family.
+ */
 var Montserrat: FontFamily? = null // init in platform code
+
+/**
+ * [Karla](https://fonts.google.com/specimen/Karla) font family.
+ */
 var Karla: FontFamily? = null // init in platform code
 
-val Typography by lazy {
+internal val Typography by lazy {
     Typography(
         h1 = TextStyle(
             fontFamily = Montserrat,

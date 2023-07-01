@@ -1,7 +1,5 @@
 package util
 
-import org.jetbrains.skia.ExternalSymbolName
-import org.jetbrains.skia.impl.NativePointer
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Int8Array
 import org.w3c.xhr.XMLHttpRequest
@@ -11,7 +9,7 @@ import kotlin.coroutines.suspendCoroutine
 import kotlin.wasm.unsafe.UnsafeWasmMemoryApi
 import kotlin.wasm.unsafe.withScopedMemoryAllocator
 
-private class MissingResourceException(url: String): Exception("GET $url failed")
+private class MissingResourceException(url: String) : Exception("GET $url failed")
 
 internal suspend fun loadResource(url: String): ArrayBuffer {
     return suspendCoroutine { continuation ->
@@ -58,10 +56,3 @@ internal fun jsInt8ArrayToKotlinByteArray(x: Int8Array): ByteArray {
     }
 }
 
-@ExternalSymbolName("_malloc")
-@kotlin.wasm.WasmImport("skia", "malloc")
-private external fun _malloc(size: Int): NativePointer
-
-@ExternalSymbolName("_free")
-@kotlin.wasm.WasmImport("skia", "free")
-private external fun _free(ptr: NativePointer)

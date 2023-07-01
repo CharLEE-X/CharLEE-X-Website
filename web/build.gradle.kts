@@ -5,8 +5,8 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "com.example"
-version = "1.0-SNAPSHOT"
+group = "com.charleex.website"
+version = libs.versions.appVersion.get()
 
 kotlin {
     wasm {
@@ -39,7 +39,7 @@ kotlin {
                 api(compose.runtime)
                 api(compose.foundation)
                 api(compose.material)
-                implementation(project(":ui"))
+                implementation(projects.ui)
             }
         }
         val commonTest by getting {
@@ -55,8 +55,8 @@ compose.experimental {
 }
 
 compose {
-    val composeVersion = project.property("compose.wasm.version") as String
+    val composeVersion = libs.versions.composeMultiplatform.get()
     kotlinCompilerPlugin.set(composeVersion)
-    val kotlinVersion = project.property("kotlin.version") as String
+    val kotlinVersion = libs.versions.kotlin.get()
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }

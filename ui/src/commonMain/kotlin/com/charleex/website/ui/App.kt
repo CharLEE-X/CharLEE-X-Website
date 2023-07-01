@@ -6,10 +6,16 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.charleex.website.ui.CharLEEXApp
-import com.charleex.website.ui.theme.CharLEEXTheme
+import com.charleex.website.ui.theme.AppTheme
 
 @Composable
-fun CharLEEXAppWASM() {
-    CharLEEXApp()
+internal fun App() {
+    AppTheme {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text("Hello, CharLEE-X Website!")
+        }
+    }
 }

@@ -13,7 +13,7 @@
     <!-- http://localhost:8083 -->
     <meta http-equiv="origin-trial" content="AvV2HYiHMw7lpIVcmGMSVmm6xC0Gzu4W5xBnZExmfHtE5zyNKFszcyNGm5IfCFQ6swnMotbn16lS1ozkJ0QzEAEAAABQeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjgwODMiLCJmZWF0dXJlIjoiV2ViQXNzZW1ibHlHQyIsImV4cGlyeSI6MTY5ODk2OTU5OX0=">
 
-    <title>JetSnack with Kotlin/Wasm</title>
+    <title>CharLEE-X Website</title>
     <script type="application/javascript" src="skiko.js"></script>
     <script type="module" src="load.mjs"></script>
     <style>
@@ -26,48 +26,35 @@
             overflow: hidden;
         }
 
+        .loading-animation {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #ccc;
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         #warning {
-            position: absolute;
-            top: 100px;
-            left: 100px;
-            z-index: 100;
-        }
-        #warning li {
-            padding-bottom: 15px;
+            text-align: center;
+            margin: 50px auto;
         }
 
-        #warning span.code {
-            font-family: monospace;
-        }
-
-        ul {
-            margin-top: 0;
-            margin-bottom: 15px;
+        #warning p {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-<canvas id="jetsnackCanvas"></canvas>
+<canvas id="charleexCanvas"></canvas>
 
 <div id="warning">
-    ⚠️ This page using <b>experimental Kotlin/Wasm</b> which requires enabling experimental features in your browser.
-    <ul>
-        <li>For <b>Chrome</b> 110 or newer:
-            <ol>
-                <li>Open <span class="code">chrome://flags/#enable-webassembly-garbage-collection</span> in the browser.</li>
-                <li>Enable <strong>WebAssembly Garbage Collection</strong>.</li>
-                <li>Relaunch the browser.</li>
-            </ol>
-            or with Chrome 109 or newer, run the browser with the <span class="code">--js-flags=--experimental-wasm-gc</span> command line argument.</li>
-        <li>For <b>Edge</b> 109 or newer: run the browser with the <span class="code">--js-flags=--experimental-wasm-gc</span> command line argument.</li>
-        <li>For <b>Firefox Nightly</b> 112 or newer:
-            <ol>
-                <li>Open <span class="code">about:config</span> in the browser.</li>
-                <li>Enable <strong>javascript.options.wasm_function_references</strong> and <strong>javascript.options.wasm_gc</strong>.</li>
-                <li>Refresh this page.</li>
-            </ol>
-        </li>
-    </ul>
+    <div class="loading-animation"></div>
+    <p>Loading...</p>
 </div>
 </body>
 </html>

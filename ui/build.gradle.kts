@@ -1,4 +1,3 @@
-import org.jetbrains.compose.compose
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
@@ -6,8 +5,8 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-group = "com.charleex.website"
-version = "1.0-SNAPSHOT"
+group = "com.charleex.website.ui"
+version = libs.versions.appVersion.get()
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
@@ -17,9 +16,11 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(compose.runtime)
-                api(compose.foundation)
-                api(compose.material)
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material)
+                implementation(compose.animation)
+                implementation(compose.animationGraphics)
             }
         }
     }
@@ -30,8 +31,8 @@ compose.experimental {
 }
 
 compose {
-    val composeVersion = project.property("compose.wasm.version") as String
+    val composeVersion = libs.versions.composeMultiplatform.get()
     kotlinCompilerPlugin.set(composeVersion)
-    val kotlinVersion = project.property("kotlin.version") as String
+    val kotlinVersion = libs.versions.kotlin.get()
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }
