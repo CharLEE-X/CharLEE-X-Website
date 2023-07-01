@@ -55,4 +55,3 @@ internal fun jsInt8ArrayToKotlinByteArray(x: Int8Array): ByteArray {
         ByteArray(size) { i -> (memBuffer + i).loadByte() }
     }
 }
-
