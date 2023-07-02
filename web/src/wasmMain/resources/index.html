@@ -18,43 +18,28 @@
     <script type="module" src="load.mjs"></script>
     <style>
         html, body {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            overflow: hidden;
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          background-color: #161D20;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
 
-        .loading-animation {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #ccc;
-            animation: spin 1s infinite linear;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        #warning {
-            text-align: center;
-            margin: 50px auto;
-        }
-
-        #warning p {
-            margin-top: 10px;
+        #loading {
+          text-align: center;
+          color: aliceblue;
         }
     </style>
 </head>
 <body>
-<canvas id="charleexCanvas"></canvas>
-
-<div id="warning">
-    <div class="loading-animation"></div>
+<div id="loading">
     <p>Loading...</p>
 </div>
+<canvas id="charleexCanvas"></canvas>
+
 </body>
 </html>

@@ -62,37 +62,27 @@ compose {
     kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }
 
-val docsDir = "$rootDir/docs"
-
-tasks.register("copyWasmAppToDocs") {
-    group = "kotlin browser"
-    dependsOn("copyDistToDocs")
-    doLast {
-        copy {
-            from("$buildDir/compileSync/wasm/main/productionExecutable/kotlin/wasmapp.uninstantiated.mjs")
-            into(docsDir)
-        }
-    }
-}
-
-tasks.register("copyDistToDocs") {
+tasks.register("copyWasmToDocs") {
     group = "kotlin browser"
     dependsOn("wasmBrowserProductionWebpack")
+
+    val sources = listOf(
+        "$buildDir/dist/wasm/productionExecutable",
+        "$buildDir/compileSync/wasm/main/productionExecutable/kotlin/wasmapp.uninstantiated.mjs",
+        "$buildDir/compileSync/wasm/main/productionExecutable/kotlin/wasmapp.map",
+        "$rootDir/kotlin-js-store/favicon.ico"
+    )
+    val dest = rootDir.resolve("docs")
+
     doLast {
-        copy {
-            from("$buildDir/dist/wasm/productionExecutable")
-            into(docsDir)
+        dest.deleteDirectoryContents()
+        sources.forEach { source ->
+            copy {
+                from(source)
+                into(dest)
+            }
         }
     }
 }
 
-tasks.register("copyFaviconToDocs") {
-    group = "kotlin browser"
-    dependsOn("copyWasmAppToDocs")
-    doLast {
-        copy {
-            from("$rootDir/kotlin-js-store/favicon.ico")
-            into(docsDir)
-        }
-    }
-}
+tasks.getByName("wasmBrowserProductionWebpack").finalizedBy("copyWasmToDocs")

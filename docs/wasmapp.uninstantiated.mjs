@@ -36,15 +36,15 @@ export async function instantiate(imports={}, runInitializer=true) {
                 arrayIndex++;
             }     
              },
+        'kotlin.wasm.internal.externrefToInt' : (ref) => Number(ref),
+        'kotlin.wasm.internal.newJsArray' : () => [],
+        'kotlin.wasm.internal.jsArrayPush' : (array, element) => { array.push(element); },
         'kotlin.wasm.internal.importStringFromWasm' : (address, length, prefix) => { 
             const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
             const str = String.fromCharCode.apply(null, mem16);
             return (prefix == null) ? str : prefix + str;
              },
         'kotlin.wasm.internal.getJsEmptyString' : () => '',
-        'kotlin.wasm.internal.externrefToInt' : (ref) => Number(ref),
-        'kotlin.wasm.internal.newJsArray' : () => [],
-        'kotlin.wasm.internal.jsArrayPush' : (array, element) => { array.push(element); },
         'kotlin.wasm.internal.externrefToString' : (ref) => String(ref),
         'kotlin.wasm.internal.externrefEquals' : (lhs, rhs) => lhs === rhs,
         'kotlin.wasm.internal.externrefHashCode' : 
@@ -108,11 +108,11 @@ export async function instantiate(imports={}, runInitializer=true) {
         'org.w3c.dom.css.height_$external_prop_setter' : (_this, v) => _this.height = v,
         'org.w3c.dom.css.width_$external_prop_setter' : (_this, v) => _this.width = v,
         'org.w3c.dom.css.style_$external_prop_getter' : (_this) => _this.style,
+        'org.w3c.dom.events.addEventListener_$external_fun' : (_this, p0, p1, p2, isDefault0) => _this.addEventListener(p0, p1, isDefault0 ? undefined : p2, ),
+        'org.w3c.dom.events.__convertKotlinClosureToJsClosure_((Js)->Unit)' : (f) => (p0) => wasmExports['__callFunction_((Js)->Unit)'](f, p0),
         'org.w3c.dom.events.timeStamp_$external_prop_getter' : (_this) => _this.timeStamp,
         'org.w3c.dom.events.preventDefault_$external_fun' : (_this, ) => _this.preventDefault(),
         'org.w3c.dom.events.Event_$external_class_instanceof' : (x) => x instanceof Event,
-        'org.w3c.dom.events.addEventListener_$external_fun' : (_this, p0, p1, p2, isDefault0) => _this.addEventListener(p0, p1, isDefault0 ? undefined : p2, ),
-        'org.w3c.dom.events.__convertKotlinClosureToJsClosure_((Js)->Unit)' : (f) => (p0) => wasmExports['__callFunction_((Js)->Unit)'](f, p0),
         'org.w3c.dom.events.ctrlKey_$external_prop_getter' : (_this) => _this.ctrlKey,
         'org.w3c.dom.events.shiftKey_$external_prop_getter' : (_this) => _this.shiftKey,
         'org.w3c.dom.events.altKey_$external_prop_getter' : (_this) => _this.altKey,
